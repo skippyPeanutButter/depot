@@ -52,4 +52,10 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_redirected_to products_path
   end
+
+  test "time line item is displayed on the sidebar in products page" do
+    get :index
+
+    assert_select "#side #time", minimum: 1
+  end
 end
