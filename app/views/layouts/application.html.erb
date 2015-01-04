@@ -13,8 +13,11 @@
   <%= @page_title || "Pragmatic Bookshelf" %>
 </div>
   <div id="columns">
-
   <div id="side">
+    <div id="cart">
+      <%= render @cart %>
+    </div>
+
     <ul>
       <li id="time"><%= Time.new.strftime("%I:%M%p  %m/%d/%Y") %></li>
       <li><a href="http://www....">Home</a></li>
