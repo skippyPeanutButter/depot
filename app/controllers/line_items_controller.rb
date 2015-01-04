@@ -29,7 +29,7 @@ class LineItemsController < ApplicationController
   def create
     session[:counter] = 0
     product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id)
+    @line_item = @cart.add_product(product.id, product.price)
 
     respond_to do |format|
       if @line_item.save
@@ -62,7 +62,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url }
+      format.html { redirect_to cart_url(session[:cart_id]), notice: "Line item successfully deleted." }
       format.json { head :no_content }
     end
   end
