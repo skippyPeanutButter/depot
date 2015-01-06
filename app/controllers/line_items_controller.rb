@@ -34,7 +34,7 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to store_url }
-        format.js
+        format.js { @current_item = @line_item }
         format.json { render action: 'show',
           status: :created, location: @line_item }
       else
@@ -65,6 +65,16 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to cart_url(session[:cart_id]), notice: "Line item successfully deleted." }
       format.json { head :no_content }
+    end
+  end
+
+  def decrement
+    @line_item = LineItem.find(params[:id])
+    @line_item.decrement
+    respond_to do |format|
+      if @line_item.save
+        format.html { redirect_to store_url }
+      end
     end
   end
 
